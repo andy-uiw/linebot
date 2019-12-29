@@ -62,7 +62,7 @@ def handle_message(event):
     _low_token = _token[0].lower()
     
     # query THU courses
-    if '雞蛋' in _token[0]  '番茄' in _token[0]:
+    if '雞蛋' in _token[0] or '番茄' in _token[0]:
         cls_list = getCls(_token[1])
         for cls in cls_list:
             _message = TextSendMessage(text=cls)	#reply course
@@ -106,7 +106,7 @@ def loadPMJson():
 
 def getCls(cls_prefix):
     ret_cls = []
-    urlstr = 'https://icook.tw/recipes/238226?utm_medium=selection2&utm_source=icook&utm_campaign=&utm_content=&utm_term='
+    urlstr = 'https://goo.gl/F8QWyJ'
     postfix = '/all/all'
     
     qry_cls = urlstr + cls_prefix + postfix
