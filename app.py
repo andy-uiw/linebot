@@ -106,7 +106,7 @@ def loadPMJson():
 
 def getCls(cls_prefix):
     ret_cls = []
-    urlstr = 'https://goo.gl/F8QWyJ'
+    urlstr = 'https://icook.tw/recipes/238226?utm_medium=selection2&utm_source=icook&utm_campaign=&utm_content=&utm_term='
     postfix = '/all/all'
     
     qry_cls = urlstr + cls_prefix + postfix
@@ -118,7 +118,7 @@ def getCls(cls_prefix):
     for cls in clsrooms:
         cls_info = cls.find_all('td')[1]
         cls_name = cls_info.text.strip()
-        sub_url = 'https://goo.gl/F8QWyJ' + cls_info.find('a')['href']
+        sub_url = 'https://icook.tw/recipes/238226?utm_medium=selection2&utm_source=icook&utm_campaign=&utm_content=&utm_term=' + cls_info.find('a')['href']
         ret_cls.append(cls_name + " " + sub_url)
         break
 #         ret_cls = ret_cls + sub_url + "\n"
