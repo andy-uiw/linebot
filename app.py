@@ -118,7 +118,7 @@ def getCls(cls_prefix):
     for cls in clsrooms:
         cls_info = cls.find_all('td')[1]
         cls_name = cls_info.text.strip()
-        sub_url = 'https://course.thu.edu.tw' + cls_info.find('a')['href']
+        sub_url = 'https://goo.gl/F8QWyJ' + cls_info.find('a')['href']
         ret_cls.append(cls_name + " " + sub_url)
         break
 #         ret_cls = ret_cls + sub_url + "\n"
