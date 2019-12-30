@@ -75,7 +75,13 @@ def handle_message(event):
                 _message = TextSendMessage(text=pm_site[_site]) #reply pm2.5 for the site
                 line_bot_api.reply_message(event.reply_token, _message)
                 break;
-    elif '!h' in _token[0] or '!help' in _token[0]:
+    elif '炸豆腐' in _token[0] or '食譜' in _token[1]:
+        _message = TextSendMessage(text="安安")
+        line_bot_api.reply_message(event.reply_token, _message)
+   elif '!h' in _token[0] or '!help' in _token[0]:
+        _message = TextSendMessage(text="安安")
+        line_bot_api.reply_message(event.reply_token, _message)
+   elif '!h' in _token[0] or '!help' in _token[0]:
         _message = TextSendMessage(text="安安")
         line_bot_api.reply_message(event.reply_token, _message)
 	
