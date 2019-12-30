@@ -12,7 +12,7 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import *
+from linebot.models import *w
 
 app = Flask(__name__)
 
@@ -60,55 +60,26 @@ def handle_message(event):
     
     _token = msg.strip().split(" ")
     _low_token = _token[0].lower()
-    
+ 	#--------------------------------------------------------------------------------------  
     # query THU courses
-    if '雞蛋' in _token[0] or '番茄' in _token[0]:
+    if '課程' in _token[0] or '課表' in _token[0]:
         cls_list = getCls(_token[1])
         for cls in cls_list:
             _message = TextSendMessage(text=cls)	#reply course
             line_bot_api.reply_message(event.reply_token, _message)
-
-    elif '誠品' in _token[0] or '書單' in _token[0]:
-        bookls = find_bookls(_token[1])
-        _message = TextSendMessage(text=bookls)	#reply course
-        line_bot_api.reply_message(event.reply_token, _message)
-    elif '空氣' in _token[0] or 'pm2' in _low_token:
-        # query PM2.5
-        for _site in pm_site:
-            if _site == _token[1]:
-                _message = TextSendMessage(text=pm_site[_site]) #reply pm2.5 for the site
-                line_bot_api.reply_message(event.reply_token, _message)
-                break;
+  
+	#--------------------------------------------------------------------------------------
     elif '!h' in _token[0] or '!help' in _token[0]:
-        _message = TextSendMessage(text="請輸入食材名稱")
+        _message = TextSendMessage(text="請輸入:課程, 誠品, 空氣 + <關鍵字>")
         line_bot_api.reply_message(event.reply_token, _message)
 	
-def find_bookls(kw):
-    with open("ESLITE.json",'r') as load_f:
-        load_dict = json.load(load_f)
-    x = load_dict['items']
-    ans = ()
-    for i in x:
-        #if i['title'] == "title":
-        if i['title'].find(str(kw))== -1:
-            pass
-#             print("")
-        else:
-            ans= (i['title']+i['link'])
-#             print (i['title'], i['link'])
-    return ans
 
-def loadPMJson():
-    with urllib.request.urlopen("http://opendata2.epa.gov.tw/AQI.json") as url:
-        data = json.loads(url.read().decode())
-        for ele in data:
-            pm_site[ele['SiteName']] = ele['PM2.5']
-
+	#--------------------------------------------------------------------------------------
 def getCls(cls_prefix):
     ret_cls = []
-    urlstr = 'https://icook.tw/recipes/238226?utm_medium=selection2&utm_source=icook&utm_campaign=&utm_content=&utm_term='
+    urlstr = 'https://course.thu.edu.tw/search-result/108/1/'
     postfix = '/all/all'
-    
+    	
     qry_cls = urlstr + cls_prefix + postfix
     
     resp = requests.get(qry_cls)
@@ -118,13 +89,14 @@ def getCls(cls_prefix):
     for cls in clsrooms:
         cls_info = cls.find_all('td')[1]
         cls_name = cls_info.text.strip()
-        sub_url = 'https://icook.tw/recipes/238226?utm_medium=selection2&utm_source=icook&utm_campaign=&utm_content=&utm_term=' + cls_info.find('a')['href']
+        sub_url = 'https://course.thu.edu.tw' + cls_info.find('a')['href']
         ret_cls.append(cls_name + " " + sub_url)
         break
+	
 #         ret_cls = ret_cls + sub_url + "\n"
 
     return ret_cls
-        
+        #--------------------------------------------------------------------------------------
             
 import os
 if __name__ == "__main__":
