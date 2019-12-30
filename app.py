@@ -83,7 +83,7 @@ def loadPMJson():
     with urllib.request.urlopen("http://opendata2.epa.gov.tw/AQI.json") as url:
         data = json.loads(url.read().decode())
         for ele in data:
-            pm_site[ele['SiteName']] = ele['PM2.5']
+            pm_site[ele['Country']] = ele['PM2.5']
 
 def getCls(cls_prefix):
     ret_cls = []
