@@ -72,7 +72,7 @@ def handle_message(event):
         # query PM2.5
         for _site in pm_site:
             if _site == _token[1]:
-                _message = TextSendMessage(text=pm_site[_county]) #reply pm2.5 for the site
+                _message = TextSendMessage(text=pm_site[_site]) #reply pm2.5 for the site
                 line_bot_api.reply_message(event.reply_token, _message)
                 break;
     elif '!h' in _token[0] or '!help' in _token[0]:
@@ -83,7 +83,7 @@ def loadPMJson():
     with urllib.request.urlopen("http://opendata2.epa.gov.tw/AQI.json") as url:
         data = json.loads(url.read().decode())
         for ele in data:
-            pm_site[ele['County']] = ele['PM2.5']
+            pm_site[ele['SiteName']] = ele['PM2.5']
 
 def getCls(cls_prefix):
     ret_cls = []
